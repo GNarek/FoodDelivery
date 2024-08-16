@@ -1,7 +1,7 @@
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import {Restaurants} from '../screens/Restaurants';
-import {Market} from '../screens/Market';
+import {Markets} from '../screens/Markets';
 import {MyCart} from '../screens/MyCart';
 import {MyOrders} from '../screens/MyOrders';
 import {MyProfile} from '../screens/MyProfile';
@@ -9,8 +9,8 @@ import keyBy from 'lodash/keyBy';
 
 export const routes = [
   {
-    key: 'restourants',
-    name: 'Restourants',
+    key: 'restaurants',
+    name: 'Restaurants',
     icon: 'restaurant-outline',
     component: Restaurants,
     IconComp: Ionicons,
@@ -19,7 +19,7 @@ export const routes = [
     key: 'market',
     name: 'Market',
     icon: 'storefront-outline',
-    component: Market,
+    component: Markets,
     IconComp: Ionicons,
   },
   {

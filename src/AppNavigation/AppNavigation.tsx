@@ -1,17 +1,44 @@
+/* eslint-disable react/no-unstable-nested-components */
+import React from 'react';
 import {Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {routes, routesMap} from '../routes';
 import {colors} from '../styles/colors';
+import {MarketDetails} from '../screens/MarketDetails';
+import {RootStackParamList} from './types';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
+
+const createScreenStack = (Component: any) => () =>
+  (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Main"
+        component={Component}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="MarketDetails"
+        component={MarketDetails}
+        options={{
+          headerBackTitle: 'Restaurants',
+        }}
+      />
+    </Stack.Navigator>
+  );
 
 export const AppNavigation = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({route}) => ({
-          tabBarIcon: ({focused, color, size}) => {
+          headerShown: false,
+          tabBarIcon: ({color, size}) => {
             const routeData = routesMap[route.name];
             return (
               <routeData.IconComp
@@ -34,7 +61,7 @@ export const AppNavigation = () => {
           <Tab.Screen
             key={route.key}
             name={route.name}
-            component={route.component}
+            component={createScreenStack(route.component)}
           />
         ))}
       </Tab.Navigator>
