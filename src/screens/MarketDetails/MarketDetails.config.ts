@@ -1,0 +1,4 @@
+export const COLUMNS_PER_ROW = 3;
+export const STICKY_SUBCATEGORY_CONTAINER_HEIGHT = 50;
+export const SUB_CATEGORY_HEADER_HEIGHT = 40;
+export const ITEM_WRAPPER_HEIGHT = 196;

@@ -48,7 +48,7 @@ const MarketCategory: React.FC<MarketCategoryProps> = ({category}) => {
         <FlatList
           horizontal={isHorizontal}
           data={category.stores}
-          keyExtractor={item => item.storeId.toString()}
+          keyExtractor={item => `${item.storeId.toString()}-${item.name}`}
           numColumns={numColumns}
           renderItem={({item}) => (
             <MarketItem market={item} isHorizontal={isHorizontal} />
@@ -71,7 +71,7 @@ export const MarketsList: React.FC<MarketsListProps> = ({categories}) => {
   return (
     <FlatList
       data={categories}
-      keyExtractor={item => item.id.toString()}
+      keyExtractor={item => `${item.id.toString()}-${item.name}`}
       renderItem={({item}) => <MarketCategory category={item} />}
       contentContainerStyle={styles.listContainer}
     />

@@ -1,0 +1,1 @@
+export {MarketDetailsList} from './MarketDeatilsList';

@@ -1,0 +1,1 @@
+export {SubcategoryTabs} from './SubcategoryTabs';

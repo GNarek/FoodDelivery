@@ -16,4 +16,6 @@ const Config = (function () {
   };
 })();
 
+export const lng = 'en-US';
+
 export default Config;

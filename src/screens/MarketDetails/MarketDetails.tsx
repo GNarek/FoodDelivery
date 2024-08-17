@@ -1,6 +1,10 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
+import {fetchMarketById} from '../../api/market';
+import {useQuery} from '@tanstack/react-query';
+import {colors} from '../../styles/colors';
+import {MarketDetailsList} from './MarketDeatilsList/MarketDeatilsList';
 
 type RootStackParamList = {
   MarketDetails: {marketId: any};
@@ -10,12 +14,30 @@ type MarketDetailsRouteProp = RouteProp<RootStackParamList, 'MarketDetails'>;
 
 export const MarketDetails = ({route}: {route: MarketDetailsRouteProp}) => {
   const {marketId} = route.params;
+  const {data, error, isLoading} = useQuery({
+    queryKey: ['market', marketId],
+    queryFn: () => fetchMarketById(marketId),
+  });
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={colors.red} />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.errorText}>Error: {error.message}</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Market Details</Text>
-      <Text style={styles.marketId}>Market ID: {marketId}</Text>
-      {/* Fetch and display more details using marketId */}
+      <MarketDetailsList data={data} />
     </View>
   );
 };
@@ -25,6 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   title: {
     fontSize: 24,
@@ -33,5 +56,8 @@ const styles = StyleSheet.create({
   marketId: {
     fontSize: 18,
     marginTop: 20,
+  },
+  errorText: {
+    color: 'red',
   },
 });
