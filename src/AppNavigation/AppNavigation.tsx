@@ -4,33 +4,35 @@ import {Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {routes, routesMap} from '../routes';
+import {ChildRoute, routes, routesMap} from '../routes';
 import {colors} from '../styles/colors';
-import {MarketDetails} from '../screens/MarketDetails';
 import {RootStackParamList} from './types';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<RootStackParamList>();
 
-const createScreenStack = (Component: any) => () =>
-  (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Main"
-        component={Component}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="MarketDetails"
-        component={MarketDetails}
-        options={{
-          headerBackTitle: 'Restaurants',
-        }}
-      />
-    </Stack.Navigator>
-  );
+const createScreenStack =
+  (Component: any, detaiedScreens: ChildRoute[]) => () =>
+    (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Main"
+          component={Component}
+          options={{
+            headerShown: false,
+          }}
+        />
+        {detaiedScreens.map(detaiedScreen => (
+          <Stack.Screen
+            name={detaiedScreen.name}
+            component={detaiedScreen.component}
+            options={{
+              headerBackTitle: detaiedScreen.backTitle,
+            }}
+          />
+        ))}
+      </Stack.Navigator>
+    );
 
 export const AppNavigation = () => {
   return (
@@ -61,7 +63,7 @@ export const AppNavigation = () => {
           <Tab.Screen
             key={route.key}
             name={route.name}
-            component={createScreenStack(route.component)}
+            component={createScreenStack(route.component, route.detaiedScreens)}
           />
         ))}
       </Tab.Navigator>

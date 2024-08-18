@@ -12,7 +12,10 @@ type RootStackParamList = {
 
 type MarketDetailsRouteProp = RouteProp<RootStackParamList, 'MarketDetails'>;
 
-export const MarketDetails = ({route}: {route: MarketDetailsRouteProp}) => {
+type Props = {route: MarketDetailsRouteProp};
+
+export const MarketDetails: React.FC<Props> = props => {
+  const {route} = props;
   const {marketId} = route.params;
   const {data, error, isLoading} = useQuery({
     queryKey: ['market', marketId],

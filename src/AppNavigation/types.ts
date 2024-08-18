@@ -3,16 +3,20 @@ import {RouteProp} from '@react-navigation/native';
 
 export type RootStackParamList = {
   Main: undefined;
-  MarketDetails: {marketId: any}; // Define the parameters for DetailsScreen
+  MarketDetails: {marketId: any};
+  MyOrderDetails: {orderId: any};
 };
 
-// Define a type for the navigation prop
 export type MarketItemNavigationProp = StackNavigationProp<
   RootStackParamList,
   'MarketDetails'
 >;
 
-// If you need to access route params, you can define a route prop type too
+export type MyOrderItemNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'MyOrderDetails'
+>;
+
 export type DetailsScreenRouteProp = RouteProp<
   RootStackParamList,
   'MarketDetails'
