@@ -1,10 +1,46 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native Developer Assignment
 
-# Getting Started
+This is a [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli). This project implements features such as a customizable home screen, pagination for order history, and real-time location tracking for delivery drivers.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Getting Started
 
-## Step 1: Start the Metro Server
+> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till the "Creating a new application" step, before proceeding.
+
+### Step 1: Install Dependencies
+
+Before running the app, make sure to install all necessary dependencies.
+
+```bash
+# using npm
+npm install
+
+# OR using Yarn
+yarn install
+```
+
+### Step 2: Provide Google Maps API Key (Android Only)
+
+To use the map feature on Android, you need to provide a Google Maps API key. This can be done by editing the `config.js` file located in the root directory of the project.
+
+Open the `config.js` file and replace `'Your_Google_Maps_API_Key_Here'` with your actual Google Maps API key:
+
+```javascript
+// config.js
+export default {
+  googleMapsApiKey: 'Your_Google_Maps_API_Key_Here',
+};
+```
+
+### Step 3: iOS Setup (Pod Installation)
+
+For iOS, navigate to the `ios` directory of the project and run `pod install` to ensure all necessary CocoaPods are installed:
+
+```bash
+cd ios
+pod install
+```
+
+### Step 4: Start the Metro Server
 
 First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
 
@@ -18,11 +54,11 @@ npm start
 yarn start
 ```
 
-## Step 2: Start your Application
+### Step 5: Start your Application
 
 Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
 
-### For Android
+#### For Android
 
 ```bash
 # using npm
@@ -32,7 +68,7 @@ npm run android
 yarn android
 ```
 
-### For iOS
+#### For iOS
 
 ```bash
 # using npm
@@ -46,34 +82,15 @@ If everything is set up _correctly_, you should see your new app running in your
 
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-## Step 3: Modifying your App
+### Step 6: Using the App Features
 
-Now that you have successfully run the app, let's modify it.
+1. **Customizable Home Screen**:
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+   - The home screen layout adapts dynamically based on backend parameters such as user preferences or time of day. You can test this feature by adjusting the parameters sent from the backend.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+2. **Pagination for My Orders**:
 
-## Congratulations! :tada:
+   - The "My Orders" section supports infinite scrolling. Scroll through the list to trigger the loading of additional pages.
 
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+3. **Real-time Location Tracking**:
+   - On the order history page, click on "Track your order" to open a new screen that shows the driver's live location on a map, updated in real-time using MQTT.
