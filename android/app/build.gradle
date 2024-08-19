@@ -69,6 +69,17 @@ def enableProguardInReleaseBuilds = false
  */
 def jscFlavor = 'org.webkit:android-jsc:+'
 
+def getApiKey() {
+    def configFile = new File(project.rootDir.parentFile, 'config.js')
+    def configText = configFile.text
+    def keyMatch = configText =~ /googleMapsApiKey:\s*['"](.+?)['"]/
+    if (keyMatch.find()) {
+        return keyMatch.group(1)
+    } else {
+        throw new GradleException("Google Maps API key not found in config.js")
+    }
+}
+
 android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -81,6 +92,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        resValue "string", "google_maps_api_key", getApiKey()
     }
     signingConfigs {
         debug {
