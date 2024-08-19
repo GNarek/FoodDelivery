@@ -24,6 +24,7 @@ const createScreenStack =
         />
         {detaiedScreens.map(detaiedScreen => (
           <Stack.Screen
+            key={detaiedScreen.name}
             name={detaiedScreen.name}
             component={detaiedScreen.component}
             options={{

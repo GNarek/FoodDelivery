@@ -1,6 +1,7 @@
 import {RouteProp} from '@react-navigation/native';
 import {StyleSheet, Text, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {TrackOrder} from './TrackOrder';
 
 type RootStackParamList = {
   MyOrderDetails: {orderId: number};
@@ -19,6 +20,7 @@ export const MyOrdersDetails: React.FC<Props> = props => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Order ID: {orderId}</Text>
+      <TrackOrder />
     </View>
   );
 };
@@ -31,6 +33,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lighter,
   },
   text: {
-    fontSize: 24,
+    fontSize: 16,
   },
 });
